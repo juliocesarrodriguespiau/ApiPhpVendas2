@@ -17,7 +17,9 @@ class VendedorService
 
     public function post() 
     {
+        $data = $_POST;
 
+        return Vendedor::insert($data);
     }
 
     public function update() 

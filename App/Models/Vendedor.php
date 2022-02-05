@@ -36,4 +36,23 @@ class Vendedor
             throw new \Exception("Nenhum vendedor cadastrado!");
         }
     }
+
+    public static function insert($data) {
+        $connPDO = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
+
+        $sql = 'INSERT INTO '.self::$table.'(nome, email, comissao) VALUES (:nome, :email, :comissao)';
+        $stmt = $connPDO->prepare($sql);
+        $stmt->bindValue(':nome', $data['nome']);
+        $stmt->bindValue(':email', $data['email']);
+        $stmt->bindValue(':comissao', $data['comissao']);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return 'Vandedor(a) cadastrado com sucesso!';
+        } else {
+            throw new \Exception("Falha ao cadastrar vendedor(a)");
+        }
+    }
+
+
 }
