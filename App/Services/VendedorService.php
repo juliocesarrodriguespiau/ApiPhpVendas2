@@ -21,14 +21,12 @@ class VendedorService
 
         return Vendedor::insert($data);
     }
-
-    public function update() 
+    
+    public function delete($id) 
     {
-
-    }
-
-    public function delete() 
-    {
+        if ($id) {
+            return Vendedor::deleteVendedor($id);
+        }
 
     }
 }

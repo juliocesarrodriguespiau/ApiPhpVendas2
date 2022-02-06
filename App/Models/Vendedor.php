@@ -54,5 +54,19 @@ class Vendedor
         }
     }
 
+    public static function deleteVendedor(int $id) {
+        $connPDO = new \PDO(DBDRIVE.': host='.DBHOST.'; dbname='.DBNAME, DBUSER, DBPASS);
+
+        $sql = 'DELETE FROM '.self::$table.' WHERE id = :id';
+        $stmt = $connPDO->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            return 'Vandedor(a) Excluído com sucesso!';
+        } else {
+            throw new \Exception("Erro ao excluir vendedor(a)!");
+        }
+    }
 
 }
